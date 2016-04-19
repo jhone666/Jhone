@@ -35,7 +35,7 @@ public class AppApplication extends Application {
         super.onCreate();
         context=this;
         NoHttp.init(this);
-        Logger.setTag("SZLC-http");
+        Logger.setTag("jhone");
         Logger.setDebug(true);// 打开noHttp框架日志
     }
 

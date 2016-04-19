@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RoundImageView">
+        <attr name="circleWith" format="dimension"/><!--圆环宽度-->
+        <attr name="circleOutSideColor" format="color"/><!--外半圆颜色-->
+        <attr name="circleInSideColor" format="color"/><!--内半圆颜色-->
+    </declare-styleable>
+</resources>

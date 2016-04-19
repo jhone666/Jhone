@@ -5,5 +5,9 @@
     <color name="colorAccent">#FF4081</color>
     <color name="status_bar">#000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="red">#FF0000</color>
     <color name="transparent">#00000000</color>
+    <color name="font_black">#2e2d2d</color>
+    <color name="font_gray">#9c9999</color>
+    <color name="bg_app">#cccccc</color>
 </resources>

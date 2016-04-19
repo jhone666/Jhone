@@ -41,6 +41,7 @@ public class EmojiActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_emoji);
+		setConsumed(true);
 		mChattinglv = (ListView) findViewById(R.id.emoji_lv);
 
 		initData();

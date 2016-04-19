@@ -16,7 +16,7 @@
         <include
             android:id="@+id/add_tool"
             layout="@layout/send_msg_tool"
-            android:visibility="gone" />
+            android:visibility="visible" />
     </LinearLayout>
 
     <ListView

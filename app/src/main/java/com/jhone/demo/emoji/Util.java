@@ -3,7 +3,6 @@ package com.jhone.demo.emoji;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 /**
- * ������
  *@Copyright Copyright (c) 2012 - 2100
   *@author    Administrator
  *@create at 2013-5-9

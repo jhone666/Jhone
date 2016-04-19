@@ -56,10 +56,11 @@ public class DeviceUtil {
      * @param context
      * @return
      */
-    public static int getWidth(Activity context) {
-        DisplayMetrics dm = new DisplayMetrics();
-        context.getWindowManager().getDefaultDisplay().getMetrics(dm);
-        return dm.widthPixels;
+    public static int getWidth(Context context) {
+        new DisplayMetrics();
+        DisplayMetrics dm = context.getResources().getDisplayMetrics();
+        int w = dm.widthPixels;
+        return w;
     }
 
     /**
@@ -67,10 +68,11 @@ public class DeviceUtil {
      * @param context
      * @return
      */
-    public static int getHeight(Activity context) {
-        DisplayMetrics dm = new DisplayMetrics();
-        context.getWindowManager().getDefaultDisplay().getMetrics(dm);
-        return dm.heightPixels;
+    public static int getHeight(Context context) {
+        new DisplayMetrics();
+        DisplayMetrics dm = context.getResources().getDisplayMetrics();
+        int h = dm.heightPixels;
+        return h;
     }
 
     public static String getIMSI(Context context) {
