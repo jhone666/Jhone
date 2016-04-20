@@ -13,16 +13,13 @@ import android.os.Vibrator;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
-
-import com.barcode.camera.CameraManager;
-import com.barcode.decoding.CaptureActivityHandler;
-import com.barcode.decoding.InactivityTimer;
-import com.barcode.view.ViewfinderView;
-import com.cn7782.android.eoa.R;
-import com.cn7782.android.eoa.ui.JoinActivity;
-import com.cn7782.android.eoa.ui.JoinFragment;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
+import com.jhone.demo.R;
+import com.jhone.demo.barcode.camera.CameraManager;
+import com.jhone.demo.barcode.decoding.CaptureActivityHandler;
+import com.jhone.demo.barcode.decoding.InactivityTimer;
+import com.jhone.demo.barcode.view.ViewfinderView;
 
 import java.io.IOException;
 import java.util.Vector;

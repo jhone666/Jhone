@@ -22,16 +22,14 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 
-import com.barcode.CaptureActivity;
-import com.barcode.camera.CameraManager;
-import com.barcode.camera.PlanarYUVLuminanceSource;
-import com.cn7782.android.eoa.R;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.DecodeHintType;
 import com.google.zxing.MultiFormatReader;
 import com.google.zxing.ReaderException;
 import com.google.zxing.Result;
 import com.google.zxing.common.HybridBinarizer;
+import com.jhone.demo.R;
+import com.jhone.demo.barcode.CaptureActivity;
 
 import java.util.Hashtable;
 

@@ -19,10 +19,10 @@ package com.jhone.demo.barcode.decoding;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.barcode.CaptureActivity;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;
 import com.google.zxing.ResultPointCallback;
+import com.jhone.demo.barcode.CaptureActivity;
 
 import java.util.Hashtable;
 import java.util.Vector;
