@@ -1,32 +1,217 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:jhone="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-     >
-<com.jhone.demo.view.SlideMenu
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
-    <LinearLayout
+    android:background="@color/white">
+
+    <com.jhone.demo.view.SlideMenu
+        android:id="@+id/slideMenu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/bg_main_activity"
         android:orientation="horizontal">
-        <!--菜单-->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/bg_app"
-            android:orientation="vertical">
+            android:orientation="horizontal">
+            <!--菜单-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.jhone.demo.view.RoundImageView
+                    android:id="@+id/iv_head"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:src="@mipmap/icon"
+                    jhone:circleInSideColor="@color/bg_app"
+                    jhone:circleOutSideColor="@color/white"
+                    jhone:circleWith="2dp" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_setting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/login" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="5dp"
+                            android:text="登入管理"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="10dp"
+                    android:layout_toRightOf="@+id/rl_setting"
+                    android:orientation="horizontal"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/setting" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="5dp"
+                            android:text="设置"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </RelativeLayout>
+            <!--内容-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/bg_app"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/status_bar">
+
+                    <com.jhone.demo.view.RoundImageView
+                        android:id="@+id/menu"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:src="@drawable/icon"
+                        />
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:text="title"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
+                <FrameLayout
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                </FrameLayout>
+
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+                    <com.jhone.demo.view.TabRadioButton
+                        android:id="@+id/first_rb"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:checked="true"
+                        android:clickable="true"
+                        android:drawableTop="@drawable/rb_main_selector"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="主页"
+                        android:textColor="@color/tab_font_selector"
+                        android:textSize="12sp"
+                        jhone:drawableHeight="30dp"
+                        jhone:drawableWidth="30dp" />
+
+                    <com.jhone.demo.view.TabRadioButton
+                        android:id="@+id/second_rb"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:clickable="true"
+                        android:drawableTop="@drawable/rb_connector_selector"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="联系人"
+                        android:textColor="@color/tab_font_selector"
+                        android:textSize="12sp"
+                        jhone:drawableHeight="30dp"
+                        jhone:drawableWidth="30dp" />
+
+                    <com.jhone.demo.view.TabRadioButton
+                        android:id="@+id/third_rb"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:clickable="true"
+                        android:drawableTop="@drawable/rb_map_selector"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="地图"
+                        android:textColor="@color/tab_font_selector"
+                        android:textSize="12sp"
+                        jhone:drawableHeight="30dp"
+                        jhone:drawableWidth="30dp" />
+
+                    <com.jhone.demo.view.TabRadioButton
+                        android:id="@+id/four_rb"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:clickable="true"
+                        android:drawableTop="@drawable/rb_found_selector"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="发现"
+                        android:textColor="@color/tab_font_selector"
+                        android:textSize="12sp"
+                        jhone:drawableHeight="30dp"
+                        jhone:drawableWidth="30dp" />
+                </RadioGroup>
+            </LinearLayout>
 
         </LinearLayout>
-        <!--内容-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/font_black"
-            android:orientation="vertical">
-
-        </LinearLayout>
-    </LinearLayout>
-</com.jhone.demo.view.SlideMenu>
+    </com.jhone.demo.view.SlideMenu>
 </RelativeLayout>

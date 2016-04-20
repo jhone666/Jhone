@@ -5,4 +5,8 @@
         <attr name="circleOutSideColor" format="color"/><!--外半圆颜色-->
         <attr name="circleInSideColor" format="color"/><!--内半圆颜色-->
     </declare-styleable>
+    <declare-styleable name="TabRadioButton">
+        <attr name="drawableWidth" format="dimension"/>
+        <attr name="drawableHeight" format="dimension"/>
+    </declare-styleable>
 </resources>

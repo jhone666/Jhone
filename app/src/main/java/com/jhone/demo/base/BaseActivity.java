@@ -122,6 +122,7 @@ public class BaseActivity extends AppCompatActivity {
         });
     }
 
+
     public void setBarIsvisible(boolean isvisible) {
         if (viewGroup == null) return;
         viewGroup.getChildAt(0).setVisibility(isvisible ? View.VISIBLE : View.GONE);
@@ -141,7 +142,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     protected void setActionBarBackunable() {
-        back.setVisibility(View.INVISIBLE);
+        back.setVisibility(View.GONE);
     }
 
     public void showActionBarRightView(View.OnClickListener clickListener) {
