@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Jhone</string>
+    <string name="msg_qrcode">请对准二维码</string>
 </resources>

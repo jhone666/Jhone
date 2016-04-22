@@ -23,6 +23,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -57,7 +58,7 @@ public final class ViewfinderView extends View {
      */
     private static final int CORNER_WIDTH = 10;
     /**
-     * 扫描框中的中间线的宽度
+     * 扫描框中的中间线的高度
      */
     private static final int MIDDLE_LINE_WIDTH = 6;
 
@@ -82,7 +83,7 @@ public final class ViewfinderView extends View {
     /**
      * 字体距离扫描框下面的距离
      */
-    private static final int TEXT_PADDING_TOP = 30;
+    private static final int TEXT_PADDING_TOP = 40;
 
     /**
      * 画笔对象的引用
@@ -128,6 +129,7 @@ public final class ViewfinderView extends View {
         possibleResultPoints = new HashSet<ResultPoint>(5);
     }
 
+    private boolean fromTop=true;
     @Override
     public void onDraw(Canvas canvas) {
         //中间的扫描框，你要修改扫描框的大小，去CameraManager里面修改
@@ -183,18 +185,28 @@ public final class ViewfinderView extends View {
                     frame.right, frame.bottom, paint);
 
             //绘制中间的线,每次刷新界面，中间的线往下移动SPEEN_DISTANCE
-            slideTop += SPEEN_DISTANCE;
-            if (slideTop >= frame.bottom) {
-                slideTop = frame.top;
+
+            if (fromTop){
+                slideTop += SPEEN_DISTANCE;
+                if (slideTop>=frame.bottom-20)fromTop=false;
+            }else{
+                slideTop -= SPEEN_DISTANCE;
+                if (slideTop<=frame.top+20)fromTop=true;
             }
+//            if (slideTop >= frame.bottom) {
+//                slideTop = frame.top;
+//            }
             canvas.drawRect(frame.left + MIDDLE_LINE_PADDING, slideTop - MIDDLE_LINE_WIDTH / 2, frame.right - MIDDLE_LINE_PADDING, slideTop + MIDDLE_LINE_WIDTH / 2, paint);
 
             //画扫描框下面的字
-//			paint.setColor(Color.WHITE);
-//			paint.setTextSize(TEXT_SIZE * density);
-//			paint.setAlpha(0x40);
-//			paint.setTypeface(Typeface.create("System", Typeface.NORMAL));
-//			canvas.drawText(getResources().getString(R.string.msg_default_status), frame.left, (float) (frame.bottom + (float)TEXT_PADDING_TOP *density), paint);
+			paint.setColor(Color.WHITE);
+			paint.setTextSize(TEXT_SIZE * density);
+			paint.setAlpha(0x40);
+			paint.setTypeface(Typeface.create("System", Typeface.NORMAL));
+            String text=getResources().getString(R.string.msg_qrcode);
+            Rect rect=new Rect();
+            paint.getTextBounds(text,0,text.length(),rect);
+			canvas.drawText(text, frame.left+(frame.right-frame.left)/2-rect.width()/2, (float) (frame.bottom + (float)TEXT_PADDING_TOP *density), paint);
 
             Collection<ResultPoint> currentPossible = possibleResultPoints;
             Collection<ResultPoint> currentLast = lastPossibleResultPoints;

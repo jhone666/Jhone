@@ -1,12 +1,17 @@
 package com.jhone.demo.barcode;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -20,6 +25,10 @@ import com.jhone.demo.barcode.camera.CameraManager;
 import com.jhone.demo.barcode.decoding.CaptureActivityHandler;
 import com.jhone.demo.barcode.decoding.InactivityTimer;
 import com.jhone.demo.barcode.view.ViewfinderView;
+import com.jhone.demo.event.CodeEvent;
+import com.jhone.demo.utils.ToastUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 import java.util.Vector;
@@ -37,7 +46,7 @@ public class CaptureActivity extends Activity implements Callback {
     private static final float BEEP_VOLUME = 0.10f;
     private boolean vibrate;
 
-    private int flag;
+//    private int flag;
 
     /**
      * Called when the activity is first created.
@@ -46,7 +55,7 @@ public class CaptureActivity extends Activity implements Callback {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.capture_activity);
-        flag = getIntent().getIntExtra("flag", 0);
+//        flag = getIntent().getIntExtra("flag", 0);
         // 初始化 CameraManager
         CameraManager.init(getApplication());
         viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
@@ -145,43 +154,42 @@ public class CaptureActivity extends Activity implements Callback {
         playBeepSoundAndVibrate();
 
 
-        Intent join = new Intent(this, JoinActivity.class);
-        join.putExtra("flag", JoinFragment.FLAG_JOIN_COMPANY);
-        join.putExtra("barcodeResult", obj.getText());
-        startActivity(join);
-        this.overridePendingTransition(R.anim.push_left_in,
-                R.anim.push_left_out);
-        finish();
+//        Intent join = new Intent(this, JoinActivity.class);
+//        join.putExtra("flag", JoinFragment.FLAG_JOIN_COMPANY);
+//        join.putExtra("barcodeResult", obj.getText());
+//        startActivity(join);
+//        finish();
 
-//        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-//        if (barcode == null) {
-//            dialog.setIcon(null);
-//        } else {
-//
-//            Drawable drawable = new BitmapDrawable(barcode);
-//            dialog.setIcon(drawable);
-//        }
-//        dialog.setTitle("扫描结果");
-//        dialog.setMessage(obj.getText());
-//        dialog.setNegativeButton("确定", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                //用默认浏览器打开扫描得到的地址
-//                Intent intent = new Intent();
-//                intent.setAction("android.intent.action.VIEW");
-//                Uri content_url = Uri.parse(obj.getText());
-//                intent.setData(content_url);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
-//        dialog.setPositiveButton("取消", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                finish();
-//            }
-//        });
-//        dialog.create().show();
+        EventBus.getDefault().post(new CodeEvent(obj));
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        if (barcode == null) {
+            dialog.setIcon(null);
+        } else {
+
+            Drawable drawable = new BitmapDrawable(barcode);
+            dialog.setIcon(drawable);
+        }
+        dialog.setTitle("扫描结果");
+        dialog.setMessage(obj.getText());
+        dialog.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //用默认浏览器打开扫描得到的地址
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse(obj.getText());
+                intent.setData(content_url);
+                startActivity(intent);
+                finish();
+            }
+        });
+        dialog.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        dialog.create().show();
     }
 
     private void initBeepSound() {

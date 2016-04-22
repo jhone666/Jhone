@@ -30,6 +30,8 @@ import com.google.zxing.Result;
 import com.google.zxing.common.HybridBinarizer;
 import com.jhone.demo.R;
 import com.jhone.demo.barcode.CaptureActivity;
+import com.jhone.demo.barcode.camera.CameraManager;
+import com.jhone.demo.barcode.camera.PlanarYUVLuminanceSource;
 
 import java.util.Hashtable;
 
