@@ -26,6 +26,8 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.SurfaceHolder;
 
+import com.yolanda.nohttp.Logger;
+
 import java.io.IOException;
 
 /**
@@ -149,12 +151,24 @@ public final class CameraManager {
             camera = null;
         }
     }
-
+    private Camera.Parameters parameters = null;
     /**
      * Asks the camera hardware to begin drawing preview frames to the screen.
      */
-    public void startPreview() {
-        if (camera != null && !previewing) {
+    public void startPreview(boolean flashing) {
+        if (camera != null) {
+//            if (previewing){
+//                camera.stopPreview();//这里释放后可以就不能扫码了
+//            }
+            if (flashing){
+                parameters = camera.getParameters();
+                parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);//开启
+                camera.setParameters(parameters);
+            }else {
+                parameters = camera.getParameters();
+                parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);//关闭
+                camera.setParameters(parameters);
+            }
             camera.startPreview();
             previewing = true;
         }

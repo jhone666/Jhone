@@ -1,6 +1,5 @@
 package com.jhone.demo.barcode;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,6 +7,7 @@ import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.hardware.Camera;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
@@ -15,9 +15,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
+import android.widget.CheckBox;
+
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.jhone.demo.R;
@@ -26,14 +30,18 @@ import com.jhone.demo.barcode.decoding.CaptureActivityHandler;
 import com.jhone.demo.barcode.decoding.InactivityTimer;
 import com.jhone.demo.barcode.view.ViewfinderView;
 import com.jhone.demo.event.CodeEvent;
-import com.jhone.demo.utils.ToastUtils;
+import com.yolanda.nohttp.Logger;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 import java.util.Vector;
 
-public class CaptureActivity extends Activity implements Callback {
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
+
+public class CaptureActivity extends AppCompatActivity implements Callback {
 
     private CaptureActivityHandler handler;
     private ViewfinderView viewfinderView;
@@ -46,8 +54,8 @@ public class CaptureActivity extends Activity implements Callback {
     private static final float BEEP_VOLUME = 0.10f;
     private boolean vibrate;
 
-//    private int flag;
-
+    @Bind(R.id.cb_light)CheckBox cb_light;
+    @Bind(R.id.cb_local)CheckBox cb_local;
     /**
      * Called when the activity is first created.
      */
@@ -55,7 +63,7 @@ public class CaptureActivity extends Activity implements Callback {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.capture_activity);
-//        flag = getIntent().getIntExtra("flag", 0);
+        ButterKnife.bind(this);
         // 初始化 CameraManager
         CameraManager.init(getApplication());
         viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
@@ -63,6 +71,21 @@ public class CaptureActivity extends Activity implements Callback {
         inactivityTimer = new InactivityTimer(this);
     }
 
+    @OnCheckedChanged({R.id.cb_local,R.id.cb_light})
+    public void checkedChanged(CheckBox checkBox){
+        switch (checkBox.getId()){
+            case R.id.cb_light:
+                if (checkBox.isChecked()){
+                    CameraManager.get().startPreview(true);
+                }else {
+                    CameraManager.get().startPreview(false);
+                }
+                break;
+            case R.id.cb_local:
+
+                break;
+        }
+    }
     @Override
     protected void onResume() {
         super.onResume();
@@ -149,6 +172,7 @@ public class CaptureActivity extends Activity implements Callback {
     }
 
     public void handleDecode(final Result obj, Bitmap barcode) {
+        CameraManager.get().startPreview(false);
         inactivityTimer.onActivity();
         viewfinderView.drawResultBitmap(barcode);
         playBeepSoundAndVibrate();

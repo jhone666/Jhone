@@ -14,4 +14,5 @@
     <dimen name="fourty">40dip</dimen>
     <dimen name="fifteen">15dip</dimen>
     <dimen name="zero">0dip</dimen>
+    <dimen name="scan_imgage">30dp</dimen>
 </resources>

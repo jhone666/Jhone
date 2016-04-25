@@ -19,6 +19,7 @@ package com.jhone.demo.barcode.view;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -60,7 +61,7 @@ public final class ViewfinderView extends View {
     /**
      * 扫描框中的中间线的高度
      */
-    private static final int MIDDLE_LINE_WIDTH = 6;
+    private static final int MIDDLE_LINE_WIDTH = 12;
 
     /**
      * 扫描框中的中间线的与扫描框左右的间隙
@@ -104,19 +105,24 @@ public final class ViewfinderView extends View {
      * 将扫描的二维码拍下来，这里没有这个功能，暂时不考虑
      */
     private Bitmap resultBitmap;
+    private boolean fromTop=true;
+    private Rect frame;
     private final int maskColor;
     private final int resultColor;
+    private Context context;
 
     private final int resultPointColor;
     private Collection<ResultPoint> possibleResultPoints;
     private Collection<ResultPoint> lastPossibleResultPoints;
 
     boolean isFirst;
+    private Bitmap scan_line;
 
     public ViewfinderView(Context context, AttributeSet attrs) {
         super(context, attrs);
-
+        this.context=context;
         density = context.getResources().getDisplayMetrics().density;
+
         //将像素转换成dp
         ScreenRate = (int) (20 * density);
 
@@ -127,17 +133,17 @@ public final class ViewfinderView extends View {
 
         resultPointColor = resources.getColor(R.color.possible_result_points);
         possibleResultPoints = new HashSet<ResultPoint>(5);
+        scan_line= BitmapFactory.decodeResource(context.getResources(),R.drawable.scan_line);
     }
 
-    private boolean fromTop=true;
     @Override
     public void onDraw(Canvas canvas) {
         //中间的扫描框，你要修改扫描框的大小，去CameraManager里面修改
-        Rect frame = CameraManager.get().getFramingRect();
-        if (frame == null) {
+        frame = CameraManager.get().getFramingRect();
+        if (frame == null||scan_line==null) {
             return;
         }
-
+        scan_line=scan_line.createScaledBitmap(scan_line,frame.right-frame.left,MIDDLE_LINE_WIDTH,false);
         //初始化中间线滑动的最上边和最下边
         if (!isFirst) {
             isFirst = true;
@@ -193,11 +199,8 @@ public final class ViewfinderView extends View {
                 slideTop -= SPEEN_DISTANCE;
                 if (slideTop<=frame.top+20)fromTop=true;
             }
-//            if (slideTop >= frame.bottom) {
-//                slideTop = frame.top;
-//            }
-            canvas.drawRect(frame.left + MIDDLE_LINE_PADDING, slideTop - MIDDLE_LINE_WIDTH / 2, frame.right - MIDDLE_LINE_PADDING, slideTop + MIDDLE_LINE_WIDTH / 2, paint);
-
+//            canvas.drawRect(frame.left + MIDDLE_LINE_PADDING, slideTop - MIDDLE_LINE_WIDTH / 2, frame.right - MIDDLE_LINE_PADDING, slideTop + MIDDLE_LINE_WIDTH / 2, paint);
+            canvas.drawBitmap(scan_line,frame.left, slideTop - MIDDLE_LINE_WIDTH / 2, paint);
             //画扫描框下面的字
 			paint.setColor(Color.WHITE);
 			paint.setTextSize(TEXT_SIZE * density);
@@ -256,6 +259,13 @@ public final class ViewfinderView extends View {
 
     public void addPossibleResultPoint(ResultPoint point) {
         possibleResultPoints.add(point);
+    }
+
+    /**
+     * @return 用于扫描手机中的图片后绘制图片到内容
+     */
+    public Rect getFrame(){
+        return frame;
     }
 
 }
