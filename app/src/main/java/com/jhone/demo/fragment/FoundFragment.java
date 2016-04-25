@@ -37,7 +37,6 @@ public class FoundFragment extends Fragment{
         view=inflater.inflate(R.layout.fragment_found,null);
         FragmentUtils.initFragment(view);
         ButterKnife.bind(this,view);
-        EventBus.getDefault().register(this);
         return view;
     }
 
@@ -51,11 +50,5 @@ public class FoundFragment extends Fragment{
         super.onDestroyView();
         ButterKnife.unbind(this);
         EventBus.getDefault().unregister(this);
-    }
-
-    @Subscribe
-    public void onEventMainThread(CodeEvent event){
-        tv_scan.setText(event.getResult().getText());
-        Logger.v(event.getResult().getText());
     }
 }
