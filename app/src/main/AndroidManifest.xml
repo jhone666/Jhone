@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
     <application
         android:name=".common.AppApplication"
         android:allowBackup="true"
@@ -28,6 +29,7 @@
         </activity>
         <activity android:name=".activity.SplashActivity"
             android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,7 +38,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.EmojiActivity"/>
-        <activity android:name=".barcode.CaptureActivity"/>
+        <activity android:name=".barcode.CaptureActivity"
+            android:screenOrientation="portrait"/>
 
     </application>
 
