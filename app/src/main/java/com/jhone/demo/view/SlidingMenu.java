@@ -299,17 +299,17 @@ public class SlidingMenu extends HorizontalScrollView {
             ViewHelper.setScaleX(mContent, rightScale);
             ViewHelper.setScaleY(mContent, rightScale);
         }
-        if (scale == 1) {
-//            mMenu.setVisibility(View.INVISIBLE);// 当菜单关闭时，可能在mContent页面可以点到菜单上的控件
-//            visi = true;
-            mMenu.setClickable(false);
-        } else {
-//            if (visi) {
-//                mMenu.setVisibility(View.VISIBLE);
-//                visi = false;
-//            }
-            mMenu.setClickable(true);
-        }
+//        if (scale == 1) {
+////            mMenu.setVisibility(View.INVISIBLE);// 当菜单关闭时，可能在mContent页面可以点到菜单上的控件
+////            visi = true;
+//            mMenu.setClickable(false);
+//        } else {
+////            if (visi) {
+////                mMenu.setVisibility(View.VISIBLE);
+////                visi = false;
+////            }
+//            mMenu.setClickable(true);
+//        }
     }
 
 }
