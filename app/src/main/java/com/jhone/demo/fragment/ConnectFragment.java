@@ -19,7 +19,7 @@ public class ConnectFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_found,null);
+        view=inflater.inflate(R.layout.fragment_connect,null);
         FragmentUtils.initFragment(view);
         return view;
     }

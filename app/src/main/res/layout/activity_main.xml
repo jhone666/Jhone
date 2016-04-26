@@ -4,11 +4,13 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <com.jhone.demo.view.SlideMenu
+    <com.jhone.demo.view.SlidingMenu
         android:id="@+id/slideMenu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg_main_activity"
+        jhone:rightPadding="100dp"
+        jhone:showAnim="true"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -32,7 +34,7 @@
                     jhone:circleOutSideColor="@color/white"
                     jhone:circleWith="2dp" />
 
-                <com.jhone.demo.view.DampLinearLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -63,7 +65,7 @@
                             android:textColor="@color/white"
                             android:textSize="14sp" />
                     </RelativeLayout>
-                </com.jhone.demo.view.DampLinearLayout>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -248,5 +250,5 @@
             </LinearLayout>
 
         </LinearLayout>
-    </com.jhone.demo.view.SlideMenu>
+    </com.jhone.demo.view.SlidingMenu>
 </RelativeLayout>

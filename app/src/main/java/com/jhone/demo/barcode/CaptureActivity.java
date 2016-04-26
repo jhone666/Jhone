@@ -289,7 +289,7 @@ public class CaptureActivity extends AppCompatActivity implements Callback {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==REQUEST_CODE){
+        if (requestCode==REQUEST_CODE&&data!=null){
             //获取选中图片的路径
             Cursor cursor = getContentResolver().query(data.getData(), null, null, null, null);
             if (cursor.moveToFirst()) {

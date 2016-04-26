@@ -17,8 +17,9 @@ import com.jhone.demo.fragment.HomePageFragment;
 import com.jhone.demo.fragment.MapFragment;
 import com.jhone.demo.utils.DeviceUtil;
 import com.jhone.demo.utils.ToastUtils;
-import com.jhone.demo.view.SlideMenu;
+import com.jhone.demo.view.SlidingMenu;
 import com.jhone.demo.view.TabRadioButton;
+import com.yolanda.nohttp.Logger;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -32,7 +33,8 @@ public class MainActivity extends AppCompatActivity implements OnCheckedChangeLi
     @Bind(R.id.second_rb) TabRadioButton second_rb;
     @Bind(R.id.third_rb) TabRadioButton third_rb;
     @Bind(R.id.four_rb) TabRadioButton four_rb;
-    @Bind(R.id.slideMenu) SlideMenu slideMenu;
+    @Bind(R.id.slideMenu)
+    SlidingMenu slideMenu;
     @Bind(R.id.menu) ImageView menu;
     @Bind(R.id.title) TextView title;
     @Override
@@ -55,15 +57,14 @@ public class MainActivity extends AppCompatActivity implements OnCheckedChangeLi
         first_rb.setChecked(true);
 
         setCurrentTitle("jhone");
-        slideMenu.setShowAnim(true);
-
+//        slideMenu.setShowAnim(true);
         DeviceUtil.setStatusBar(this);
 
     }
 
     @OnClick(R.id.menu)
     public void toggleMenu(){
-        slideMenu.toggleMenu();
+        slideMenu.toggle();
     }
 
     private Fragment homepageFragment,connectFragment,mapFragment,foundFragment;
@@ -106,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements OnCheckedChangeLi
     private long mCurrentBackTime; // 保存当前 按下返回键的时间
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (slideMenu.isOpen()){
+        if (slideMenu.isOpen){
             slideMenu.closeMenu();
             return true;
         }
@@ -121,7 +122,6 @@ public class MainActivity extends AppCompatActivity implements OnCheckedChangeLi
         }
         return super.onKeyDown(keyCode, event);
     }
-
     private void setCurrentTitle(String str){
         this.title.setText(str);
     }

@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jhone.demo.R;
@@ -29,7 +30,7 @@ import butterknife.OnClick;
 public class FoundFragment extends Fragment{
 
     private View view;
-    @Bind(R.id.tv_scan)TextView tv_scan;
+    @Bind(R.id.rl_scan)RelativeLayout rl_scan;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class FoundFragment extends Fragment{
         return view;
     }
 
-    @OnClick(R.id.tv_scan)
+    @OnClick(R.id.rl_scan)
     public void toScan(){
         startActivity(new Intent(getActivity(), CaptureActivity.class));
     }
@@ -49,6 +50,5 @@ public class FoundFragment extends Fragment{
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
-        EventBus.getDefault().unregister(this);
     }
 }
