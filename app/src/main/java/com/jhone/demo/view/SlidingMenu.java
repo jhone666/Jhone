@@ -152,7 +152,6 @@ public class SlidingMenu extends HorizontalScrollView {
             case MotionEvent.ACTION_UP:
                 int scrollX = getScrollX();
                 if (filging<= getScrollVelocity()) {// 响应快速左滑和右滑打开或关闭菜单
-//                    Logger.d(filging+"--->"+getScrollVelocity());
                     if (isOpen&&start>end) {
                         closeMenu();
                     } else if (!isOpen&&start<end){
@@ -161,7 +160,7 @@ public class SlidingMenu extends HorizontalScrollView {
                     recycleVelocityTracker();
                     return true;
                 }else{
-                    if (isOpen) {// 当菜单打开时点击菜单以外的区域关闭菜单
+                    if (isOpen&&start==end) {// 当菜单打开时点击菜单以外的区域关闭菜单
                         rect=new Rect();
                         mContent.getGlobalVisibleRect(rect);
                         if (rect.contains(((int)ev.getX()),((int)ev.getY()))) {
