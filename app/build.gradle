@@ -34,4 +34,5 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile files('lib/zxing.jar')
+    compile 'com.android.support:design:23.3.0'
 }

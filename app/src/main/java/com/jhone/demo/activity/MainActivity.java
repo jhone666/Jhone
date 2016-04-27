@@ -2,6 +2,7 @@ package com.jhone.demo.activity;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.widget.ImageView;
@@ -57,7 +58,6 @@ public class MainActivity extends AppCompatActivity implements OnCheckedChangeLi
         first_rb.setChecked(true);
 
         setCurrentTitle("jhone");
-//        slideMenu.setShowAnim(true);
         DeviceUtil.setStatusBar(this);
 
     }

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg_main_activity"
-        jhone:rightPadding="100dp"
+        jhone:rightPadding="25%"
         jhone:showAnim="true"
         android:orientation="horizontal">
 
@@ -38,7 +38,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:background="@color/white"
                     android:orientation="vertical">
 
                     <RelativeLayout

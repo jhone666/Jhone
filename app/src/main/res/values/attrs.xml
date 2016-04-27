@@ -10,7 +10,7 @@
         <attr name="drawableHeight" format="dimension"/>
     </declare-styleable>
     <declare-styleable name="SlidingMenu">
-        <attr name="rightPadding" format="dimension"/><!--菜单打开时距右边的距离-->
+        <attr name="rightPadding" format="fraction"/><!--菜单打开时距右边的距离,百分数-->
         <attr name="showAnim" format="boolean"/><!--是否显示动画-->
     </declare-styleable>
 </resources>

@@ -19,6 +19,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 
 import com.jhone.demo.R;
+import com.jhone.demo.utils.DeviceUtil;
 import com.nineoldandroids.view.ViewHelper;
 import com.yolanda.nohttp.Logger;
 
@@ -77,15 +78,13 @@ public class SlidingMenu extends HorizontalScrollView {
             int attr = a.getIndex(i);
             switch (attr) {
                 case R.styleable.SlidingMenu_rightPadding:
-                    /**
-                     * getDimesionPixelSize()：得到pix像素值
-                     * TypedValue.applyDimension():将一个int值(50)转成以dp为单位的值 attr
-                     * :xml中配置的值 param2 :声明的默认值(50)
-                     */
-                    mMenuRightPadding = a.getDimensionPixelSize(attr,
-                            (int) TypedValue.applyDimension(
-                                    TypedValue.COMPLEX_UNIT_DIP, 0, context
-                                            .getResources().getDisplayMetrics()));
+                    WindowManager wm = (WindowManager) context
+                            .getSystemService(Context.WINDOW_SERVICE);
+                    // DisplayMetrics 屏幕量度对象， 包含屏幕的一些信息，如 宽 高 密度等
+                    DisplayMetrics outMetrics = new DisplayMetrics();
+                    wm.getDefaultDisplay().getMetrics(outMetrics);
+                    mScreenWidth = outMetrics.widthPixels;
+                    mMenuRightPadding= (int) (a.getFraction(attr,1,1, (float) 0.25)* mScreenWidth);
                     break;
                 case R.styleable.SlidingMenu_showAnim:
                     showAnim=a.getBoolean(attr,false);
@@ -94,14 +93,6 @@ public class SlidingMenu extends HorizontalScrollView {
         }
         // 回收耗资源对象
         a.recycle();
-
-        WindowManager wm = (WindowManager) context
-                .getSystemService(Context.WINDOW_SERVICE);
-        // DisplayMetrics 屏幕量度对象， 包含屏幕的一些信息，如 宽 高 密度等
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        wm.getDefaultDisplay().getMetrics(outMetrics);
-        mScreenWidth = outMetrics.widthPixels;
-        mMenuRightPadding= (int) (mScreenWidth*0.28D);
         filging=ViewConfiguration.get(context).getScaledMinimumFlingVelocity();
     }
 
@@ -150,6 +141,7 @@ public class SlidingMenu extends HorizontalScrollView {
                 end = ev.getX();
                 break;
             case MotionEvent.ACTION_UP:
+                Logger.d("ACTION_UP");
                 int scrollX = getScrollX();
                 if (filging<= getScrollVelocity()) {// 响应快速左滑和右滑打开或关闭菜单
                     if (isOpen&&start>end) {
