@@ -129,19 +129,26 @@ public class SlidingMenu extends HorizontalScrollView {
     float start = 0f;
     float end = 0f;
     private Rect rect;
+    boolean down=false;
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         createVelocityTracker(ev);
         switch (ev.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                start = ev.getX();
-                break;
+//            不能在这里获取start，因为当子控件设置onClick事件后，不会在调用down事件
+//            case MotionEvent.ACTION_DOWN:
+//                Logger.d("ACTION_DOWN");
+//                start = ev.getX();
+//                break;
             case MotionEvent.ACTION_MOVE:
+                if (!down){
+                    down=true;
+                    start=ev.getX();
+                }
                 end = ev.getX();
                 break;
             case MotionEvent.ACTION_UP:
-                Logger.d("ACTION_UP");
+                down=false;
                 int scrollX = getScrollX();
                 if (filging<= getScrollVelocity()) {// 响应快速左滑和右滑打开或关闭菜单
                     if (isOpen&&start>end) {
